@@ -1,66 +1,55 @@
 #include "iostream"
 #include "vector"
-#include "unordered_set"
 #include "algorithm"
 using namespace std;
 
 struct nfa {
-    int states, alphabets; 
-    vector <vector <unordered_set <int> > > table; // to store the transition table
+    int states, alphabets;
+    vector <vector < vector <int> > > table; 
 };
 
-void print_table(nfa a) {
-    unordered_set <int> :: iterator itr;
-    for(int i = 0; i < a.states; i++) {
-        cout << i + 1<< " :: ";
-        for(int j = 0; j < a.alphabets; j++) {
-            unordered_set <int> states = a.table[i][j];
-            for(itr = states.begin(); itr != states.end(); itr++) {
-                cout << *itr + 1 << " ";
-            }
-            cout << "|";
-        }
-        cout << endl;
-    }
-}
-void find_all_e_closures_helper(nfa n, int state, unordered_set <int> &closure) {
-    unordered_set <int> toStates = n.table[state][0];
-    closure.insert(state);
-    if(toStates.find(-1) != toStates.end()) {
+void find_all_e_closures_helper(nfa n, int state, vector <int> &closure) {
+    vector <int> toStates = n.table[state][0];
+    if(toStates[0] == -1) {
         return;
     }
     else {
-        unordered_set <int>::iterator itr;
+        vector <int>::iterator itr;
         for(itr = toStates.begin(); itr != toStates.end(); itr++) {
-            if(find(closure.begin(), closure.end(), *itr) == closure.end()) {
-                closure.insert(*itr);
-            }
+            closure.push_back(*itr);
             find_all_e_closures_helper(n, *itr, closure);
         }
     }
 }
 
 void find_all_e_closures(nfa n) {
-
-    // vector <unordered_set <int> > allClosures;
-    unordered_set <int> :: iterator it;
-    
+    vector <vector <int> > allClosures;
+    vector <int> :: iterator it;
     for(int i = 0; i < n.states; i++) {
-        unordered_set <int> closure;
+        vector <int> closure;
         find_all_e_closures_helper(n, i, closure);
-    
+
         if(!closure.empty()) {
-            cout << i << ": ";
+            vector <int> :: iterator itor;
+            itor = unique(closure.begin(), closure.end());
+            closure.resize(distance(closure.begin(), itor));
+            
+            cout << "State " << i << ": ";
             for( it = closure.begin(); it != closure.end(); it++) {
-                cout << *it + 1 << " ";
+                cout << *it << " ";
             }
             cout << endl;
         }
-        closure.clear();
+        else {
+            cout << "Empty" << endl;
+        }
     }
 }
 
+
 int main() {
+    nfa a;
+    return 0;
     nfa n;
 
     // Read the number of states and alphabets from the user.
@@ -70,9 +59,9 @@ int main() {
 
     // Read the transition table from the user.
     for(int i = 0; i < n.states; i++) {
-        vector < unordered_set <int> > row;
+        vector < vector <int> > row;
         for(int j = 0; j < n.alphabets; j++) {
-            unordered_set <int> toStates;
+            vector <int> toStates;
             int number, state;
             
             // Read the number of states;
@@ -81,18 +70,17 @@ int main() {
             if(number == 0) {
                 // If there is no transition for the state and for the given  
                 // alphabet, store -1 in the transition table
-                toStates.insert(-1);
+                toStates.push_back(-1);
             } else {
                 while(number--) {
                     cin >> state;
-                    toStates.insert(state);
+                    toStates.push_back(state);
                 }
             }
             row.push_back(toStates);
         }
         n.table.push_back(row);
     }
-    // print_table(n);
-    find_all_e_closures(n);
+    // find_all_e_closures(n);
     return 0;    
 }
