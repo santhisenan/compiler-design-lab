@@ -4,81 +4,65 @@
 using namespace std;
 
 struct nfa {
-        int states, alpha;
-	vector <int> final_state;
-	vector <vector <int> > tt;
+    int states, alphabets; 
+    vector <vector <vector <int> > > table; // to store the transition table
 };
 
-
-void print_closure(vector <int> closure) {
-	vector <int> :: iterator itr;
-	itr = closure.begin();
-	//cout << ;
-	for(; itr != closure.end(); itr++) {
-		cout << *itr << " ";
-	}
-	cout << endl;
+void find_all_e_closures_helper(nfa n, int state, vector <int> &closure) {
+    vector <int> toStates = n.table[state][0];
+    if(toStates[0] == -1) {
+        return;
+    }
+    else {
+        vector <int>::iterator itr;
+        for(itr = toStates.begin(); itr != toStates.end(); itr++) {
+            cout << *itr << endl;
+            closure.push_back(*itr);
+            find_all_e_closures_helper(n, *itr, closure);
+        }
+    }
 }
 
-
-vector<int>  find_closure(nfa a, int state) {
-	vector <int> closure;
-	if(find(a.final_state.begin(), a.final_state.end(), state) != a.final_state.end()) {
-		return closure;
-	}
-	for(int i = 0; i < a.states; i++) {
-		if(a.tt[state][0] != -1) {
-			closure.push_back(a.tt[state][0]);
-			vector <int> subpart;
-			subpart = find_closure(a, a.tt[state][0]);
-			closure.insert(closure.end(), subpart.begin(), subpart.end());
-		}
-	}
-	sort(closure.begin(), closure.end());
-	closure.erase(unique(closure.begin(), closure.end()), closure.end());
-	return closure;
+void find_all_e_closures(nfa n) {
+    vector <int> closure;
+    find_all_e_closures_helper(n, 0, closure);
+    cout << closure.size();
 }
-
 
 int main() {
-	nfa a;
-	int states, alpha, toState, noFinal;
-	vector <vector <int> > table;
-	vector <int> final;
-	cout << "Enter the number of states and alphabets" << endl; 
-	cin >> states >> alpha;
-	a.states = states;
-	a.alpha = alpha;
+    nfa n;
 
-	for(int i = 0; i < states; i++) {
-		vector <int> temp;
-		for(int j = 0; j < alpha; j++) {
-			cin >> toState;
-			temp.push_back(toState);
-		}
-		table.push_back(temp);
-	}
+    // Read the number of states and alphabets from the user.
+    // Number of alphabets should include epsilon
+    cout << "Enter the number of states and alphabets" << endl;
+    cin >> n.states >> n.alphabets;
 
-	a.tt = table;
-	cout << "Enter the final states" << endl;
-	cin >> noFinal;
-	for(int i = 0; i < noFinal; i++) {
-		cin >> toState;
-		final.push_back(toState);
-	}
-	a.final_state = final;
-
-//	int state;
-//	cin >> state;
-
-	for(int l = 0; l < states; l++){
-		vector <int> closure;
-		closure = find_closure(a, l);
-		cout << l << " :" ;
-        	print_closure(closure);
-		closure.empty();
-	} 
-	return 0;
-
+    // Read the transition table from the user.
+    for(int i = 0; i < n.states; i++) {
+        vector < vector <int> > row;
+        for(int j = 0; j < n.alphabets; j++) {
+            vector <int> toStates;
+            int number, state;
+            
+            // Read the number of states;
+            // cout << "Enter the number of states for state " << i << "and transition " << j << "combination" << endl;
+            cin >> number;
+            
+            if(number == 0) {
+                // If there is no transition for the state and for the given  
+                // alphabet, store -1 in the transition table
+                toStates.push_back(-1);
+            } else {
+                // cout << "Enter the states" << endl;
+                while(number--) {
+                    cin >> state;
+                    toStates.push_back(state);
+                }
+            }
+            row.push_back(toStates);
+        }
+        n.table.push_back(row);
+    }
+    find_all_e_closures(n);
+    return 0;    
 }
-
