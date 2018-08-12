@@ -1,13 +1,12 @@
-#include "iostream"
-#include "vector"
-#include "unordered_set"
-#include "algorithm"
-using namespace std;
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+#include <algorithm>
 
-struct nfa {
-    int states, alphabets; 
-    vector <vector <unordered_set <int> > > table; // to store the transition table
-};
+#include "./structs/nfa.h"
+#include "./header_files/closure.h"
+
+using namespace std;
 
 void print_table(nfa a) {
     unordered_set <int> :: iterator itr;
@@ -23,32 +22,15 @@ void print_table(nfa a) {
         cout << endl;
     }
 }
-void find_all_e_closures_helper(nfa n, int state, unordered_set <int> &closure) {
-    unordered_set <int> toStates = n.table[state][0];
-    closure.insert(state);
-    if(toStates.find(-1) != toStates.end()) {
-        return;
-    }
-    else {
-        unordered_set <int>::iterator itr;
-        for(itr = toStates.begin(); itr != toStates.end(); itr++) {
-            if(find(closure.begin(), closure.end(), *itr) == closure.end()) {
-                closure.insert(*itr);
-            }
-            find_all_e_closures_helper(n, *itr, closure);
-        }
-    }
-}
 
 void find_all_e_closures(nfa n) {
 
-    // vector <unordered_set <int> > allClosures;
     unordered_set <int> :: iterator it;
     
     for(int i = 0; i < n.states; i++) {
         unordered_set <int> closure;
-        find_all_e_closures_helper(n, i, closure);
-    
+        find_e_closure(n, i, closure);
+
         if(!closure.empty()) {
             cout << i << ": ";
             for( it = closure.begin(); it != closure.end(); it++) {
