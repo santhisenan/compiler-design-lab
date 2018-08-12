@@ -1,50 +1,20 @@
-#include "iostream"
-#include "vector"
-#include "unordered_set"
-#include "algorithm"
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+#include <algorithm>
+
+#include "./structs/nfa.h"
+#include "./header_files/closure.h"
+#include "./header_files/show_output.h"
+
 using namespace std;
 
-struct nfa {
-    int states, alphabets; 
-    vector <vector <vector <int> > > table; // to store the transition table
-};
-
-// void print_table(nfa a) {
-//     unordered_set <int> :: iterator itr;
-//     for(int i = 0; i < a.states; i++) {
-//         cout << i + 1<< " :: ";
-//         for(int j = 0; j < a.alphabets; j++) {
-//             unordered_set <int> states = a.table[i][j];
-//             for(itr = states.begin(); itr != states.end(); itr++) {
-//                 cout << *itr + 1 << " ";
-//             }
-//             cout << "|";
-//         }
-//         cout << endl;
-//     }
-// }
-void find_all_e_closures_helper(nfa n, int state, unordered_set <int> &closure) {
-    unordered_set <int> toStates = n.table[state][0];
-    closure.insert(state);
-    if(toStates.find(-1) != toStates.end()) {
-        return;
-    }
-    else {
-        unordered_set <int>::iterator itr;
-        for(itr = toStates.begin(); itr != toStates.end(); itr++) {
-            if(find(closure.begin(), closure.end(), *itr) == closure.end()) {
-                closure.insert(*itr);
-            }
-            find_all_e_closures_helper(n, *itr, closure);
-        }
-    }
-}
 
 void convert_enfa(nfa n) {
     int s = n.states, a = n.alphabets;
     for(int i = 0; i < s; i++) {
         for(int j = 0; j < a; j++) {
-            vector states = n.table[i][j];
+            vector <int> states = n.table[i][j];
             vector <int> :: iterator itr;
             for(itr = states.begin(); itr != states.end(); itr++) {
 
