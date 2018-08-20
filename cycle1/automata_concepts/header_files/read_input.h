@@ -11,7 +11,7 @@ using namespace std;
 void read_transition_table(nfa &n) {
     // Read the number of states and alphabets from the user.
     // Number of alphabets should include epsilon
-    cout << "Enter the number of states and alphabets" << endl;
+    // cout << "Enter the number of states and alphabets" << endl;
     cin >> n.states >> n.alphabets;
 
     // Read the transition table from the user.

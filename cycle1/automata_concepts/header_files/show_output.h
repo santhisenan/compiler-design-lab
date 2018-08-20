@@ -13,7 +13,7 @@ void print_table(nfa a)
     unordered_set<int>::iterator itr;
     for (int i = 0; i < a.states; i++)
     {
-        cout << i + 1 << " :: ";
+        cout << i + 1 << " : ";
         for (int j = 0; j < a.alphabets; j++)
         {
             unordered_set<int> states = a.table[i][j];
