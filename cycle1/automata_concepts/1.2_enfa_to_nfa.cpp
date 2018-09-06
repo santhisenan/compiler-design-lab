@@ -8,7 +8,7 @@
 #include "./header_files/read_input.h"
 #include "./header_files/closure.h"
 #include "./header_files/show_output.h"
-#include "./header_files/helpers.h"
+#include "./header_files/conversions/enfa_nfa.h"
 
 using namespace std;
 

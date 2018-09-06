@@ -1,0 +1,133 @@
+\documentclass[a4paper, 12pt]{report}
+
+\begin{document}
+    \title{Compiler Design Lab Report}
+    \author{
+        \Large{\textbf{Santhisenan A}} \\
+        University Roll Number \textit{TVE15CS050} \\ 
+        Department of Computer Science \\
+        College of Engineering Trivandrum \\}
+    \date{Aug - Nov 2018}
+    \maketitle
+    \newpage
+
+    \chapter{Automata Concepts}
+
+    \section{Finding $\epsilon$ - closures }
+    \subsection{Problem}
+    Write program to find $\epsilon$ – closure of all states of 
+    any given NFA with $\epsilon$ transition
+    \subsection{Algorithm}
+    The algorithm for finding $\epsilon$ Closure is as follows:
+    \begin{itemize}
+        \item{Iterate through all the states in the NFA}
+        \item{For each state, find the states reachable via epsilon transitions
+        and add them to the epsilon closure.}
+        \item{For the all the states added to epsilon closure, recursively 
+        execute the function to find the epsilon closure.}
+    \end{itemize}
+
+    \subsection{Code}
+    \begin{verbatim}
+void find_e_closure(nfa n, int state, unordered_set<int> &closure) {
+    unordered_set<int> toStates = n.table[state][0];
+    closure.insert(state);
+    if (toStates.find(-1) != toStates.end())
+    {
+        return;
+    }
+    else
+    {
+        unordered_set<int>::iterator itr;
+        for (itr = toStates.begin(); itr != toStates.end(); itr++)
+        {
+            if (find(closure.begin(), closure.end(), *itr) == closure.end())
+            {
+                closure.insert(*itr);
+            }
+            find_e_closure(n, *itr, closure);
+        }
+    }
+}
+    \end{verbatim}
+    \newpage
+    
+    \section{Conversion from an NFA with $\epsilon$ transitions to an NFA 
+    without $\epsilon$ transitions}
+    
+    \subsection{Problem}
+    Write program to convert an NFA with $\epsilon$ transitions to an NFA 
+    without $\epsilon$ transitions.
+    \section{Algorithm}
+    \begin{itemize}
+        \item{Initialize an empty object of type nf a with variable name t}
+        \item{Initialize t.num states = a.num states, t.num alphabets = a.num alphabets
+and t.final states = a.final states}
+        \item{Iterate through each of the state i in Q
+        \begin{itemize}
+            \item {Initialize l to the ε closure of state i of ε-NFA a – Iterate through each of the input symbol j in Σ}
+                \begin{itemize}
+                    \item {Initialize an empty list of states f ∗ Iterate through each state k in l and Add all states of a.transition table[k][j + 1] to f ∗ Remove all the duplicates from f}
+                    \item {Compute the ε-closure c of f}
+                    \item {Set t.transition table[i][j] = c}
+                \end{itemize}
+        \end{itemize}}
+• \item{Return t as the NFA without ε-transitions corresponding to the ε-NFA a}
+    \end{itemize}
+
+    \subsection{Code} 
+    \begin{verbatim}
+        // To convert e-NFA to NFA
+void enfa_to_nfa(nfa n, nfa &m)
+{
+    m.states = n.states;
+    m.alphabets = n.alphabets;
+
+    int s = n.states, a = n.alphabets;
+
+    for (int i = 0; i < s; i++)
+    {
+        vector<unordered_set<int> > row;
+
+        // Insert -1 to alphabet epsilon
+        unordered_set<int> nullState;
+        nullState.insert(-1);
+        row.push_back(nullState);
+        nullState.clear();
+
+        // Find the e Closure of the current state and store in eClosure
+        unordered_set<int> eClosure;
+        unordered_set<int>::iterator itr;
+        find_e_closure(n, i, eClosure);
+
+        for (int j = 1; j < a; j++)
+        {
+            unordered_set<int> temp, tempClosure, toStates;
+            unordered_set<int>::iterator it;
+            for (itr = eClosure.begin(); itr != eClosure.end(); itr++)
+            {
+                temp = n.table[*itr][j];
+                if (!temp.empty())
+                {
+                    for (it = temp.begin(); it != temp.end(); it++)
+                    {
+                        // cout << "Hello" << *it << endl;
+                        if(*it != -1) {
+                            find_e_closure(n, *it, tempClosure);
+                            append_sets(toStates, tempClosure);
+                        }
+                    }
+                }
+            }
+            if(toStates.empty()) {
+                toStates.insert(-1);
+            }
+            row.push_back(toStates);
+            toStates.clear();
+        }
+        m.table.push_back(row);
+        row.clear();
+    }
+}
+    \end{verbatim}
+\end{document}

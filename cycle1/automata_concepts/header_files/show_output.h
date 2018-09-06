@@ -3,8 +3,10 @@
 
 #include <iostream>
 #include <unordered_set>
+#include <vector>
 
 #include "../structs/nfa.h"
+#include "../structs/dfa.h"
 
 using namespace std;
 
@@ -22,6 +24,30 @@ void print_table(nfa a)
                 cout << *itr + 1 << " ";
             }
             cout << "|";
+        }
+        cout << endl;
+    }
+}
+
+void print_table_dfa(dfa a)
+{
+    for(int i = 0; i < a.alphabets; i++) {
+        vector <bitset <10> > DFARow;
+        vector<bitset<10> >::iterator rowItr;
+        DFARow = a.table[i];
+        for(rowItr = DFARow.begin(); rowItr != DFARow.end(); rowItr++) {
+            bitset <10> DFAState = *rowItr;
+            if(DFAState.none()) {
+                cout << -1;
+                cout << " | ";
+                continue;
+            }
+            for(int j = 0; j < DFAState.size(); j++) {
+                if(DFAState[j]) {
+                    cout << j << " ";
+                }
+            }
+            cout << " | ";
         }
         cout << endl;
     }
