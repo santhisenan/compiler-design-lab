@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.20)  20 AUG 2018 23:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.11.20)  6 SEP 2018 07:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -134,7 +134,13 @@ Overfull \hbox (5.2002pt too wide) in paragraph at lines 132--132
 re);[] 
  []
 
-[4] [5] (./cycle_1_report.aux) ) 
+[4] [5]
+Overfull \hbox (73.12523pt too wide) in paragraph at lines 177--177
+[]                \OT1/cmtt/m/n/12 for(itr = toStates.begin(); itr != toStates.
+end(); itr++) {[] 
+ []
+
+[6] [7] (./cycle_1_report.aux) ) 
 Here is how much of TeX's memory you used:
  282 strings out of 492995
  3447 string characters out of 6132703
@@ -151,10 +157,10 @@ lic/amsfonts/cm/cmr17.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmtt12.pfb>
-Output written on cycle_1_report.pdf (6 pages, 78403 bytes).
+Output written on cycle_1_report.pdf (8 pages, 81506 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 59 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

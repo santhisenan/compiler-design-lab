@@ -130,4 +130,49 @@ void enfa_to_nfa(nfa n, nfa &m)
     }
 }
     \end{verbatim}
+
+    \newpage
+    
+    \section{Conversion from an NFA to a DFA}
+    
+    \subsection{Problem}
+    Write program to convert an NFA with $\epsilon$ transitions to an NFA 
+    without $\epsilon$ transitions.
+    \section{Algorithm}
+    \begin{itemize}
+        \item{Start with the start of the DFA}
+        \item {Find the epsilon closure of the start state.}
+        \item {For each input symbol, find the states to which the NFA goes.}
+        \item {Group all those states together and name it as a new state in the nfa.}
+        \item {Perform the above steps till all the states have been traversed.}
+    \end{itemize}
+
+    \subsection{Code} 
+    \begin{verbatim}
+        // To convert e-NFA to NFA
+void nfa_to_dfa(nfa n, dfa &m)
+{
+    m.alphabets = n.alphabets;
+    for(int i = 0; i < n.alphabets; i++) {
+        vector <bitset <10> > DFARow;
+        for(int j = 0; j < n.states; j++) {
+            unordered_set <int> eClosure;
+            find_e_closure(n, j, eClosure);
+            bitset <10> toStatesDFA(0);
+            for(int k = 0; k < eClosure.size(); k++) {
+                unordered_set <int> toStates;
+                toStates = n.table[i][k];
+                unordered_set <int> :: iterator itr;
+                for(itr = toStates.begin(); itr != toStates.end(); itr++) {
+                    if(*itr != -1) {
+                        toStatesDFA.set(*itr);
+                    }
+                }
+            }
+            DFARow.push_back(toStatesDFA);
+        }
+        m.table.push_back(DFARow);
+    }
+}
+    \end{verbatim}
 \end{document}
