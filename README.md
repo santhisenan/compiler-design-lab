@@ -17,8 +17,7 @@ CYCLE 1:
 
 CYCLE 2:  
 ### LEX AND YACC – 15 marks  
-    5) Design and implement a lexical analyzer for given language using C and the lexical
-analyzer should ignore redundant spaces, tabs and new line. (2 marks)
+    5) Design and implement a lexical analyzer for given language using C and the lexical analyzer should ignore redundant spaces, tabs and new line. (2 marks)
     
     6) Implementation of Lexical Analyzer using Lex Tool. (5 marks)
     
@@ -40,7 +39,8 @@ CYCLE 3:
     10) Construct a recursive descent parser for an expression. (3 marks)
     
     11) Construct a Shift Reduce Parser for a given language. (4 marks) 
-    Cycle 3 should be completed before 04/10/2018
+    
+    - Cycle 3 should be completed before 04/10/2018
 
 CYCLE 4:  
 ### CODE OPTIMIZATION, INTERMEDIATE CODE GENERATION AND CODE GENERATION – 20 marks 
@@ -52,7 +52,8 @@ CYCLE 4:
     14)  Implement Intermediate code generation for simple expressions. (5 marks)
     
     15)  Implement the back end of the compiler which takes the three address code and produces the 8086 assembly language instructions that can be assembled and run using an 8086 assembler. The target assembly instructions can be simple move, add, sub, jump etc. (5 marks)
-    Cycle 4 should be completed before 01/11/2018
+    
+    - Cycle 4 should be completed before 01/11/2018
 	
 
 * Half the marks will be reduced for late completion of a program. The program will not be evaluated if submitted later than 1 week from the date for submission, without valid reason. 
