@@ -32,11 +32,11 @@ void print_table(nfa a)
 void print_table_dfa(dfa a)
 {
     for(int i = 0; i < a.alphabets; i++) {
-        vector <bitset <10> > DFARow;
-        vector<bitset<10> >::iterator rowItr;
+        vector <bitset <128> > DFARow;
+        vector<bitset<128> >::iterator rowItr;
         DFARow = a.table[i];
         for(rowItr = DFARow.begin(); rowItr != DFARow.end(); rowItr++) {
-            bitset <10> DFAState = *rowItr;
+            bitset <128> DFAState = *rowItr;
             if(DFAState.none()) {
                 cout << -1;
                 cout << " | ";

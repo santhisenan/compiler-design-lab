@@ -11,11 +11,11 @@ void nfa_to_dfa(nfa n, dfa &m)
 {
     m.alphabets = n.alphabets;
     for(int i = 0; i < n.alphabets; i++) {
-        vector <bitset <10> > DFARow;
+        vector <bitset <128> > DFARow;
         for(int j = 0; j < n.states; j++) {
             unordered_set <int> eClosure;
             find_e_closure(n, j, eClosure);
-            bitset <10> toStatesDFA(0);
+            bitset <128> toStatesDFA(0);
             for(int k = 0; k < eClosure.size(); k++) {
                 unordered_set <int> toStates;
                 toStates = n.table[i][k];

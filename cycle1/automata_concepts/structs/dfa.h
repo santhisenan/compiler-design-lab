@@ -9,8 +9,8 @@ using namespace std;
 struct dfa
 {
     int alphabets;
-    bitset<10> states;
-    vector<vector<bitset <10> > > table; // to store the transition table
+    bitset<128> states;
+    vector<vector<bitset <128> > > table; // to store the transition table
 };
 
 #endif

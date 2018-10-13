@@ -58,7 +58,7 @@ void find_e_closure(nfa n, int state, unordered_set<int> &closure) {
     \subsection{Problem}
     Write program to convert an NFA with $\epsilon$ transitions to an NFA 
     without $\epsilon$ transitions.
-    \section{Algorithm}
+    \subsection{Algorithm}
     \begin{itemize}
         \item{Initialize an empty object of type nf a with variable name t}
         \item{Initialize t.num states = a.num states, t.num alphabets = a.num alphabets
@@ -175,4 +175,52 @@ void nfa_to_dfa(nfa n, dfa &m)
     }
 }
     \end{verbatim}
+
+\chapter{Lex and YACC}
+\section{Implementation of a lexical analyser using C++}
+\subsection{Aim}
+Design and implement a lexical analyzer for given language using C and the lexical
+analyzer should ignore redundant spaces, tabs and new line.
+\subsection{Lex: An introduction}
+\subsubsection{Lex input language}
+Lex expressions are also called regular expressions or patterns. The fundamental 
+elements of lex expressions include characters, strings and sets of characters
+called as character classes.
+
+Characters include letters a to z, A to Z and \_ and the digits 0 - 9. Most of 
+the other characters are treated as special characters by lex. 
+
+A string is a sequence of characters, not including a new line, enclosed in 
+double quotes.
+
+A sequence of characters enclosed within square brackets([ ]) forms a character 
+class. It matches a single instance of any character within the brackets. If a 
+carat ( $\hat{}$ ) follows the opening bracket, the class matches any character 
+other than those inside the brackets. 
+
+\subsubsection{Lex programs}
+A lex program consists of three sections: 
+\begin{itemize}
+    \item{definitions}
+    \item{translations}
+    \item{functions}
+\end{itemize}
+
+C style comments and newlines used in a lex program is treated as white space in 
+lex. Lines starting with a blank or tab are copied as such to the lex output 
+file. 
+
+\textbf{Definition section}: The definition section is separated form the following section by 
+a single line containing only $\%\%$. We can define names regular expressions 
+in this section. This section may be empty.
+
+\textbf{Translation section}: This section contains regular expressions paired with 
+actions, which define what a lexical analyser should do when a regular 
+expression is found. The first nonesscaped tab or space marks the beginning of
+an action.
+
+\textbf{Function section}: This section can contain anything and it will be attached to 
+the end of lex output file as such. This section can be omitted. This section, 
+if present should be separated from the translation section by using a $\%\%$.
+
 \end{document}
