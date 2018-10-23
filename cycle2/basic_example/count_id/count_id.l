@@ -5,7 +5,7 @@ letter [A-Za-z]
 %}
 
 %%
-{letter}({letter}|{digit})*     count++;
+{letter}({letter}|{digit})*     count++;`
 %%
 int main() {
     yylex();
