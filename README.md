@@ -22,10 +22,10 @@ CYCLE 2:
     6) Implementation of Lexical Analyzer using Lex Tool. (5 marks)
     
     7) Generate YACC specification for a few syntactic categories. 
-	a) Program to recognize a valid arithmetic expression that uses operator +, – , * and /. (2 marks)
-	b) Program to recognize a valid variable which starts with a letter followed by any number of letters or digits. (2 marks)
-	c) Implementation of Calculator using LEX and YACC. (2 marks)
-	d) Convert the BNF rules into YACC form and write code to generate abstract. (2 marks)
+	    a) Program to recognize a valid arithmetic expression that uses operator +, – , * and /. (2 marks)
+	    b) Program to recognize a valid variable which starts with a letter followed by any number of letters or digits. (2 marks)
+	    c) Implementation of Calculator using LEX and YACC. (2 marks)
+	    d) Convert the BNF rules into YACC form and write code to generate abstract. (2 marks)
 
     - Cycle 2 should be completed before 13/09/2018.
 
