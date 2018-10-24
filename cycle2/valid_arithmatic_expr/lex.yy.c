@@ -449,8 +449,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "valid_arithmatic_expression.l"
-#line 2 "valid_arithmatic_expression.l"
+#line 1 "valid_arithmatic_expr.l"
+#line 2 "valid_arithmatic_expr.l"
 #include "y.tab.h"
 #line 456 "lex.yy.c"
 
@@ -634,7 +634,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 4 "valid_arithmatic_expression.l"
+#line 4 "valid_arithmatic_expr.l"
 
 #line 640 "lex.yy.c"
 
@@ -721,33 +721,33 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 5 "valid_arithmatic_expression.l"
+#line 5 "valid_arithmatic_expr.l"
 {return ID;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 6 "valid_arithmatic_expression.l"
+#line 6 "valid_arithmatic_expr.l"
 {return NUMBER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 7 "valid_arithmatic_expression.l"
+#line 7 "valid_arithmatic_expr.l"
 {;}
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 8 "valid_arithmatic_expression.l"
+#line 8 "valid_arithmatic_expr.l"
 {return 0;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 9 "valid_arithmatic_expression.l"
+#line 9 "valid_arithmatic_expr.l"
 {return yytext[0];}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 10 "valid_arithmatic_expression.l"
+#line 10 "valid_arithmatic_expr.l"
 ECHO;
 	YY_BREAK
 #line 754 "lex.yy.c"
@@ -1747,6 +1747,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 10 "valid_arithmatic_expression.l"
+#line 10 "valid_arithmatic_expr.l"
 
 
