@@ -45,32 +45,33 @@ CYCLE 3:
 CYCLE 4:  
 
     11) In this lab we are going to construct a compiler|interpreter for a simple imperative programming language. The CFG is given below.
+    
+        1) Program-> PROG declarations BEGIN command_sequence END
 
-    1) Program-> PROG declarations BEGIN command_sequence END
+        2) declarations -> e |INTEGER id_seq IDENTIFIER.
 
-    2) declarations -> e |INTEGER id_seq IDENTIFIER.
+        3) id_seq → e | id_seq IDENTIFIER,
 
-    3) id_seq → e | id_seq IDENTIFIER,
+        4) command_sequence ->e | command_sequence command ;
 
-    4) command_sequence ->e | command_sequence command ;
+        5) command -> e
+        | IDENTIFIER : =expression
+        | IF exp THEN command_sequence ELSE command_sequence ENDIF
+        | WHILE exp DO command_sequence ENDWHILE
+        | READ IDENTIFIER
+        | WRITE expression
 
-    5) command -> e
-    | IDENTIFIER : =expression
-    | IF exp THEN command_sequence ELSE command_sequence ENDIF
-    | WHILE exp DO command_sequence ENDWHILE
-    | READ IDENTIFIER
-    | WRITE expression
+        6) expression -> NUMBER | IDENTIFIER | ( expression )
+        | expression + expression | expression * expression
+        | expression - expression | expression / expression
+        | expression = expression
+        | expression < expression
+        | expression > expression
 
-    6) expression -> NUMBER | IDENTIFIER | ( expression )
-    | expression + expression | expression * expression
-    | expression - expression | expression / expression
-    | expression = expression
-    | expression < expression
-    | expression > expression
-
-    where the non-terminal symbols are given in all lowercase and the terminal symbols are given in all caps or as literal symbols. The start symbol is program. There are two context sensitive requirements for the language, variables must be declared before they are referenced and a variable may be declared only once.
+        where the non-terminal symbols are given in all lowercase and the terminal symbols are given in all caps or as literal symbols. The start symbol is program. There are two context sensitive requirements for the language, variables must be declared before they are referenced and a variable may be declared only once.
 
     An example program is given below.
+    
     prog
     integer a,b.
     begin
@@ -82,14 +83,15 @@ CYCLE 4:
     end
 
     Generation of lexical analyzer and parser for our language.
+    
     Input: A program in our language.
     Output: Whether a valid program or not .
         
-12) Creating a symbol table for our language,     (linked list implementation) 
+    12) Creating a symbol table for our language, (linked list implementation) 
 
-Input: A programming language.
+    Input: A programming language.
 
-Output: The contents of the symbol table.
+    Output: The contents of the symbol table.
     
     Make modification to the parser module that we did in the first assignment by implementing the following functions whose prototype is given.
     Structure of the symbol table is
@@ -112,21 +114,21 @@ Output: The contents of the symbol table.
     
     void context_check(char *name);//checks the contest sensitive requirement of our language and if violated appropriate error messages.
 
-13) Code generation.
-Input: A program in our Language.
-Output: stack machine code written into a file.
+    13) Code generation.
+    Input: A program in our Language.
+    Output: stack machine code written into a file.
 
-The code is generated from the implicitly created parse tree. Here we are generating code for a virtual machine called a stack machine. The virtual machine consists of three segments. A data segment,a code segment and an expression stack. The data segment contains the values associated with the variables. Each variable is assigned to a location in the data segment which holds the associated value. The code segment consists of a sequence of operations, i.e. the stack machine code. Program constants are incorporated in the code segment since their values do not change. The expression stack is a stack which is used to hold intermediate values in the evaluation of expressions.
+    The code is generated from the implicitly created parse tree. Here we are generating code for a virtual machine called a stack machine. The virtual machine consists of three segments. A data segment,a code segment and an expression stack. The data segment contains the values associated with the variables. Each variable is assigned to a location in the data segment which holds the associated value. The code segment consists of a sequence of operations, i.e. the stack machine code. Program constants are incorporated in the code segment since their values do not change. The expression stack is a stack which is used to hold intermediate values in the evaluation of expressions.
 
-Instruction format for the stack machine
+    Instruction format for the stack machine
 
-opcode
-operand
+    opcode
+    operand
 
-Instruction set
-(operand = 0 for opcodes with no operands. Eg. write, It, gt, etc.)
+    Instruction set
+    (operand = 0 for opcodes with no operands. Eg. write, It, gt, etc.)
 
-eg:
+    eg:
 
     input:
     prog
