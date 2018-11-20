@@ -53,12 +53,14 @@ class stack {
         void display() {
             if(top == 0) {
                 cout << "\n The stack is empty!";
+                return;
             }
 
             // Prints the stack
             for(int i = 0; i < top; i++) {
                 cout << stk[i];
             }
+            cout << " ";
         }
 };
 
